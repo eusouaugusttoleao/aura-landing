@@ -1,208 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AURA — Sessao Estrategica com Augustto Leao</title>
-<meta name="description" content="Sessao Estrategica AURA: diagnostico de autoridade e posicionamento com Augustto Leao. Pare de ser invisivel no mercado.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#090A10;--surface:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.08);--gold:#C9A84C;--gold-light:#F0D78C;--text:#E8E8E8;--muted:#888;--white:#FFF}
-body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-a{color:var(--gold);text-decoration:none}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070707" />
+    <link rel="canonical" href="https://eusouaugusttoleao.github.io/aura-landing/" />
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,0.06) 0%,transparent 50%);pointer-events:none}
-.hero-badge{display:inline-block;padding:6px 16px;border:1px solid rgba(201,168,76,0.3);border-radius:20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;backdrop-filter:blur(4px)}
-.hero h1{font-size:clamp(32px,6vw,64px);font-weight:800;line-height:1.1;max-width:800px;margin-bottom:20px;letter-spacing:-1px}
-.hero h1 span{background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:600px;line-height:1.6;margin-bottom:32px}
-.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:linear-gradient(135deg,var(--gold),#D4AF37);color:#000;font-family:'Manrope';font-size:16px;font-weight:700;border-radius:8px;border:none;cursor:pointer;transition:all 0.3s;text-decoration:none;box-shadow:0 4px 24px rgba(201,168,76,0.25)}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.4)}
-.cta-btn svg{width:20px;height:20px}
-.hero-sub{margin-top:16px;font-size:13px;color:var(--muted)}
+    <title>AURA — Mentoria de Posicionamento · Augustto Leão</title>
+    <meta
+      name="description"
+      content="Ative seu posicionamento e domine sua comunicação e presença. Mentoria AURA com Augustto Leão — Mentor do Patrimônio Social."
+    />
 
-/* SECTIONS */
-section{padding:80px 24px}
-.container{max-width:960px;margin:0 auto}
-.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.section-title{font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;letter-spacing:-0.5px}
-.section-desc{font-size:16px;color:var(--muted);line-height:1.7;max-width:640px;margin-bottom:40px}
+    <meta property="og:title" content="Mentoria AURA · Augustto Leão" />
+    <meta property="og:description" content="Sua AURA governa seu MERCADO." />
+    <meta property="og:image" content="https://eusouaugusttoleao.github.io/augustto-aura-assets/mentor-augustto.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
 
-/* PROBLEMA */
-.problema{background:linear-gradient(180deg,var(--bg) 0%,rgba(245,101,101,0.03) 100%)}
-.problema-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.problema-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color 0.3s}
-.problema-card:hover{border-color:rgba(245,101,101,0.3)}
-.problema-card h3{font-size:15px;font-weight:700;margin-bottom:8px;color:#F56565}
-.problema-card p{font-size:13px;color:var(--muted);line-height:1.6}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mentoria AURA · Augustto Leão" />
+    <meta name="twitter:description" content="Sua AURA governa seu MERCADO." />
+    <meta name="twitter:image" content="https://eusouaugusttoleao.github.io/augustto-aura-assets/mentor-augustto.jpg" />
 
-/* METODO */
-.metodo{background:linear-gradient(180deg,rgba(201,168,76,0.02) 0%,var(--bg) 100%)}
-.blocos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;counter-reset:bloco}
-.bloco{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;counter-increment:bloco;transition:all 0.3s}
-.bloco:hover{border-color:rgba(201,168,76,0.4);transform:translateY(-4px)}
-.bloco::before{content:counter(bloco);position:absolute;top:16px;right:16px;font-size:48px;font-weight:800;color:rgba(201,168,76,0.08);line-height:1}
-.bloco h3{font-size:16px;font-weight:700;color:var(--gold);margin-bottom:8px}
-.bloco p{font-size:13px;color:var(--muted);line-height:1.6}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://eusouaugusttoleao.github.io" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      href="https://eusouaugusttoleao.github.io/augustto-aura-assets/augustto-palco-frente.jpg"
+      fetchpriority="high"
+    />
 
-/* OFERTA */
-.oferta{text-align:center;background:linear-gradient(180deg,var(--bg) 0%,rgba(201,168,76,0.04) 100%)}
-.oferta-box{background:var(--surface);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:48px 32px;max-width:560px;margin:0 auto;position:relative;overflow:hidden}
-.oferta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.oferta-box h3{font-size:24px;font-weight:800;margin-bottom:8px}
-.oferta-price{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:16px 0}
-.oferta-price small{font-size:16px;-webkit-text-fill-color:var(--muted)}
-.oferta-list{text-align:left;max-width:360px;margin:24px auto;list-style:none}
-.oferta-list li{padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text);display:flex;align-items:center;gap:10px}
-.oferta-list li::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
-.oferta-cta{margin-top:32px}
-
-/* AUGUSTTO */
-.augustto{text-align:center}
-.augustto-bio{font-size:16px;color:var(--muted);line-height:1.8;max-width:640px;margin:0 auto 32px}
-.augustto-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
-.augustto-tags span{padding:6px 14px;border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--muted)}
-
-/* FOOTER */
-.footer-cta{text-align:center;padding:60px 24px;background:linear-gradient(180deg,var(--bg),rgba(201,168,76,0.06))}
-.footer-cta h2{font-size:clamp(20px,3vw,32px);font-weight:800;margin-bottom:8px}
-.footer-cta p{color:var(--muted);margin-bottom:24px;font-size:15px}
-footer{text-align:center;padding:24px;color:#444;font-size:11px;border-top:1px solid var(--border)}
-
-@media(max-width:600px){
-  .hero{padding:60px 20px}
-  section{padding:60px 20px}
-  .oferta-box{padding:32px 20px}
-  .oferta-price{font-size:36px}
-}
-</style>
-</head>
-<body>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">Mentoria AURA — Augustto Leao</div>
-  <h1>Seu mercado nao te ve.<br><span>Isso muda agora.</span></h1>
-  <p>Sessao Estrategica de diagnostico de autoridade e posicionamento. 60 minutos que revelam exatamente por que voce e invisivel — e o que fazer para mudar.</p>
-  <a href="https://wa.me/5561985810821?text=Quero%20agendar%20minha%20Sess%C3%A3o%20Estrat%C3%A9gica%20AURA" class="cta-btn" target="_blank">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Quero minha Sessao Estrategica
-  </a>
-  <p class="hero-sub">Vagas limitadas — atendimento direto com Augustto Leao</p>
-</section>
-
-<!-- PROBLEMA -->
-<section class="problema">
-  <div class="container">
-    <p class="section-label">O problema</p>
-    <h2 class="section-title">Voce tem competencia. Mas o mercado nao sabe.</h2>
-    <p class="section-desc">Isso se chama Invisibilidade da Autoridade — e e o maior sabotador silencioso de carreiras brilhantes.</p>
-    <div class="problema-grid">
-      <div class="problema-card">
-        <h3>Voce entrega mais do que cobra</h3>
-        <p>Seus clientes reconhecem depois, mas o mercado nao te encontra antes. O valor existe — o posicionamento nao.</p>
-      </div>
-      <div class="problema-card">
-        <h3>Voce tem conteudo mas nao converte</h3>
-        <p>Posta, grava, aparece — e ninguem compra. O problema nao e volume. E ausencia de autoridade percebida.</p>
-      </div>
-      <div class="problema-card">
-        <h3>Voce e opcao, nao referencia</h3>
-        <p>Quando seu nome aparece, e ao lado de 5 outros. Voce compete por preco porque nao compete por presenca.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- METODO -->
-<section class="metodo">
-  <div class="container">
-    <p class="section-label">O metodo AURA</p>
-    <h2 class="section-title">4 blocos. 12 semanas. Uma transformacao.</h2>
-    <p class="section-desc">Engenharia de dentro para fora: identidade alinhada com comunicacao, resultando em presenca inabalavel.</p>
-    <div class="blocos">
-      <div class="bloco">
-        <h3>Autoimagem</h3>
-        <p>Identidade, autoconhecimento, crencas limitantes, reconstrucao do valor proprio.</p>
-      </div>
-      <div class="bloco">
-        <h3>Posicionamento</h3>
-        <p>Marca pessoal, diferenciacao real, presenca digital e offline estrategica.</p>
-      </div>
-      <div class="bloco">
-        <h3>Comunicacao Magnetica</h3>
-        <p>Oratoria, linguagem corporal, tom de voz, storytelling que conecta e converte.</p>
-      </div>
-      <div class="bloco">
-        <h3>Autoridade em Movimento</h3>
-        <p>Execucao, vendas com autoridade, lideranca visivel, resultado mensuravel.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- OFERTA -->
-<section class="oferta">
-  <div class="container">
-    <p class="section-label">Primeiro passo</p>
-    <h2 class="section-title">Sessao Estrategica AURA</h2>
-    <div class="oferta-box">
-      <h3>Diagnostico de Autoridade</h3>
-      <p style="color:var(--muted);font-size:14px;margin-bottom:16px">60 minutos de imersao individual com Augustto Leao</p>
-      <div class="oferta-price">R$ 2.500<br><small>ou R$ 5.000 apos o periodo de lancamento</small></div>
-      <ul class="oferta-list">
-        <li>Diagnostico completo de autoridade percebida</li>
-        <li>Mapeamento de gaps de posicionamento</li>
-        <li>Plano de acao personalizado (As 7 Pedras do Poder)</li>
-        <li>Analise de comunicacao e presenca digital</li>
-        <li>Roteiro estrategico de 30 dias</li>
-        <li>Acesso ao grupo exclusivo AURA (30 dias)</li>
-        <li>Gravacao da sessao para revisao</li>
-      </ul>
-      <div class="oferta-cta">
-        <a href="https://wa.me/5561985810821?text=Quero%20agendar%20minha%20Sess%C3%A3o%20Estrat%C3%A9gica%20AURA%20%E2%80%94%20R%24%202.500" class="cta-btn" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Agendar minha sessao
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AUGUSTTO -->
-<section class="augustto">
-  <div class="container">
-    <p class="section-label">Quem e</p>
-    <h2 class="section-title">Augustto Leao</h2>
-    <p class="augustto-bio">Ex-CMO e Diretor de Marketing. Fundador da Sellect Intelligence. Criador do metodo AURA e das 7 Pedras do Poder. Especialista em automacao com IA, posicionamento de marca e autoridade pessoal. Construiu um ecossistema de 10 agentes de inteligencia artificial para escalar operacoes de mentoria. Atua na intersecao entre marketing, tecnologia e desenvolvimento humano.</p>
-    <div class="augustto-tags">
-      <span>Marketing Estrategico</span>
-      <span>Automacao com IA</span>
-      <span>Marca Pessoal</span>
-      <span>Posicionamento</span>
-      <span>Mentoria High-Ticket</span>
-      <span>As 7 Pedras do Poder</span>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER CTA -->
-<section class="footer-cta">
-  <h2>Pronto pra ser visto como referencia?</h2>
-  <p>60 minutos. Um diagnostico. O inicio da transformacao.</p>
-  <a href="https://wa.me/5561985810821?text=Quero%20agendar%20minha%20Sess%C3%A3o%20Estrat%C3%A9gica%20AURA" class="cta-btn" target="_blank">
-    <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Falar com Augustto no WhatsApp
-  </a>
-</section>
-
-<footer>
-  <p>AURA — Augustto Leao | Sellect Intelligence</p>
-</footer>
-
-</body>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070707'/%3E%3Ctext x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='20' fill='%23B0B0B0'%3EA%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

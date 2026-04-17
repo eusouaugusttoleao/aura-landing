@@ -1,0 +1,156 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+
+  /* ─── AURA Type Families ─── */
+  --font-sans:      'Poppins', system-ui, -apple-system, sans-serif;
+  --font-editorial: 'Poppins', system-ui, -apple-system, sans-serif;
+
+  /* ─── AURA Color System — Graphite Edition ─── */
+  --aura-black:     #070707;
+  --aura-deep:      #0F0F0F;
+  --aura-ember:     #1A1A1A;
+  --aura-fire:      #4A4A4A;
+  --aura-flame:     #787878;
+  --aura-gold:      #B0B0B0;
+  --aura-cream:     #D2D2D2;
+  --aura-white:     #F0F0F0;
+
+  --aura-cream-60:  rgba(240, 240, 240, 0.6);
+  --surface:        rgba(255, 255, 255, 0.04);
+  --border-aura:    rgba(255, 255, 255, 0.08);
+  --border-gold:    rgba(176, 176, 176, 0.22);
+
+  /* ─── Aura Type Scale ─── */
+  --text-hero:    80px;
+  --text-h2:      52px;
+  --text-h3:      22px;
+  --text-subhead: 24px;
+  --text-body:    17px;
+  --text-caption: 14px;
+  --text-eyebrow: 11px;
+  --text-tag:     10px;
+
+  --background:            var(--aura-black);
+  --foreground:            var(--aura-white);
+  --card:                  var(--aura-ember);
+  --card-foreground:       var(--aura-white);
+  --popover:               var(--aura-deep);
+  --popover-foreground:    var(--aura-white);
+  --primary:               var(--aura-white);
+  --primary-foreground:    var(--aura-black);
+  --secondary:             var(--aura-gold);
+  --secondary-foreground:  var(--aura-black);
+  --muted:                 var(--aura-ember);
+  --muted-foreground:      var(--aura-cream);
+  --accent:                var(--aura-flame);
+  --accent-foreground:     var(--aura-white);
+  --destructive:           #c0392b;
+  --destructive-foreground: #ffffff;
+  --border:                var(--border-aura);
+  --input:                 transparent;
+  --input-background:      var(--aura-ember);
+  --switch-background:     var(--aura-gold);
+  --font-weight-medium:    600;
+  --font-weight-normal:    400;
+  --font-weight-bold:      800;
+  --ring:                  var(--aura-flame);
+  --radius:                0rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  /* Focus-visible premium state (U4) */
+  :focus-visible {
+    outline: 2px solid var(--aura-gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+    transition: outline-offset 0.15s ease;
+  }
+  a:focus-visible,
+  button:focus-visible {
+    outline-offset: 4px;
+  }
+
+  /* Skip link (A7) */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 200;
+    padding: 0.75rem 1rem;
+    background: var(--aura-white);
+    color: var(--aura-black);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus-visible {
+    top: 1rem;
+  }
+}
+
+/* Utilities */
+.num-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+.font-editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 200;
+}
+
+/* Reduced motion (U3 — A1) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

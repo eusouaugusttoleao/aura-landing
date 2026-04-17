@@ -13,9 +13,9 @@
   --aura-ember:     #1A1A1A;
   --aura-fire:      #4A4A4A;
   --aura-flame:     #787878;
-  --aura-gold:      #B0B0B0;
-  --aura-cream:     #D2D2D2;
-  --aura-white:     #F0F0F0;
+  --aura-gold:      #FFD700;
+  --aura-cream:     #FFFFFF;
+  --aura-white:     #FFFFFF;
 
   --aura-cream-60:  rgba(240, 240, 240, 0.6);
   --surface:        rgba(255, 255, 255, 0.04);

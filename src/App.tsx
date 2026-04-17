@@ -2,7 +2,17 @@ import React from "react";
 import { ThemeProvider } from "@figma/astraui";
 import "@figma/astraui/styles.css";
 import { motion, MotionConfig, useScroll, useTransform, useReducedMotion } from "motion/react";
-import { MessageCircle } from "lucide-react";
+import { 
+  MessageCircle, 
+  TrendingDown, 
+  BadgeCheck, 
+  VolumeX, 
+  ZapOff, 
+  Ghost, 
+  Brain, 
+  EyeOff, 
+  Lock 
+} from "lucide-react";
 
 const ASSETS = "https://eusouaugusttoleao.github.io/augustto-aura-assets";
 const heroImg = `${ASSETS}/augustto-palco-frente.jpg`;
@@ -58,7 +68,7 @@ function GrainOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[100] opacity-[0.035] mix-blend-overlay"
+      className="pointer-events-none fixed inset-0 z-[1] opacity-[0.02] mix-blend-overlay"
       style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E")`,
       }}
@@ -68,8 +78,8 @@ function GrainOverlay() {
 
 function AuraLandingPage() {
   const { scrollYProgress } = useScroll();
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -93,7 +103,7 @@ function AuraLandingPage() {
         {/* ─── SEÇÃO 01 — HERO ─── */}
         <section
           aria-labelledby="hero-heading"
-          className="relative min-h-[100vh] flex flex-col items-center justify-center pt-24 pb-16 px-6 overflow-hidden"
+          className="relative min-h-[100vh] flex flex-col items-center justify-start pt-16 pb-16 px-6 overflow-hidden"
         >
           <div className="absolute inset-0 z-0 overflow-hidden">
             <video
@@ -102,26 +112,28 @@ function AuraLandingPage() {
               muted
               playsInline
               preload="auto"
-              className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+              className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none opacity-60"
             >
               <source src={`${ASSETS}/pexels-abstract-01.mp4`} type="video/mp4" />
             </video>
-            {/* Scrim gradient — U2 */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--aura-black)]/40 via-[var(--aura-black)]/70 to-[var(--aura-black)] pointer-events-none" />
+
           </div>
 
           <motion.div
-            className="relative z-10 w-full max-w-[1040px] mx-auto flex flex-col items-center text-center"
-            style={{ opacity: heroOpacity, y: heroY }}
+            className="relative z-50 w-full max-w-[1040px] mx-auto flex flex-col items-center text-center mt-6"
+            style={{ opacity: 1 }}
           >
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: EASE_REVEAL }}
-              className="mb-10 text-[var(--aura-white)] flex flex-col items-center"
+              className="mb-8 text-white flex flex-col items-center"
             >
-              <AuraLogo className="h-16 sm:h-20 w-auto mb-6" ariaLabel="AURA" />
-              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-[var(--aura-gold)]/70">
+              <AuraLogo className="h-20 sm:h-24 w-auto mb-2 opacity-30" ariaLabel="AURA" />
+              <div 
+                className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-white font-editorial"
+                style={{ textShadow: "none", fontWeight: 200 }}
+              >
                 <span>Ativação</span>
                 <span className="opacity-40" aria-hidden="true">·</span>
                 <span>Unicidade</span>
@@ -133,10 +145,11 @@ function AuraLandingPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: EASE_REVEAL }}
-              className="inline-block px-5 py-2 uppercase text-[11px] font-semibold tracking-[3px] text-[var(--aura-gold)] mb-10 bg-white/[0.08] backdrop-blur-md rounded-full"
+              className="inline-block px-5 py-2 uppercase text-[11px] font-bold tracking-[3px] text-[#FFD700] mb-6 bg-white/[0.12] backdrop-blur-xl rounded-full border border-white/20"
+              style={{ textShadow: "none" }}
             >
               &gt; seja protagonista da sua história - mentoria e protocolo - por augustto leao
             </motion.div>
@@ -146,30 +159,32 @@ function AuraLandingPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2, ease: EASE_REVEAL }}
-              className="text-[clamp(34px,6.5vw,72px)] font-extrabold leading-[1.1] tracking-[-1px] md:tracking-[-2px] text-[var(--aura-white)] max-w-[1000px] mb-6 uppercase"
+              className="text-[clamp(28px,6vw,68px)] font-black leading-[0.95] tracking-[-1px] md:tracking-[-3px] text-white max-w-[1100px] mb-8 uppercase"
+              style={{ textShadow: "none" }}
             >
-              ATIVE SEU POSICIONAMENTO, <br className="hidden md:block" />
-              DOMINE SUA COMUNICACAO <br className="hidden md:block" />
-              E PRESENCA
+              <span className="block whitespace-nowrap">ATIVE SEU POSICIONAMENTO,</span>
+              <span className="block whitespace-nowrap">DOMINE SUA COMUNICAÇÃO</span>
+              <span className="block whitespace-nowrap">PRESENÇA NA VIDA E NOS NEGÓCIOS</span>
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.35 }}
-              className="text-[clamp(16px,2vw,22px)] font-bold tracking-[1px] md:tracking-[2px] text-[var(--aura-white)] mb-8 max-w-[800px] uppercase opacity-90"
+              className="text-[clamp(15px,2vw,20px)] text-white mb-10 max-w-[1100px] uppercase font-editorial"
+              style={{ textShadow: "none", fontWeight: 200, fontStyle: 'italic', letterSpacing: '4px' }}
             >
-              EM 12 SEMANAS VEJA O REFLEXO DA SUA AUTORIDADE ALINHADA COM SUA COMPETENCIA.
+              EM 12 SEMANAS VEJA O REFLEXO DA SUA AUTORIDADE ALINHADA COM SUA COMPETÊNCIA.
             </motion.div>
 
 
 
             {/* Espaço para o Vídeo do YouTube */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.45 }}
-              className="w-full max-w-[340px] sm:max-w-[380px] mt-4 mb-10 rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/10"
+              className="w-full max-w-[320px] sm:max-w-[360px] mt-4 mb-8 rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/20"
             >
               <div className="relative w-full aspect-[9/16] bg-black/50 backdrop-blur-sm">
                 <iframe
@@ -184,19 +199,21 @@ function AuraLandingPage() {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="text-[clamp(18px,2.4vw,26px)] font-extrabold text-[var(--aura-gold)] mb-4 max-w-[820px] leading-snug uppercase"
+              className="text-[clamp(20px,2.8vw,30px)] font-black mb-6 max-w-[940px] leading-tight uppercase"
+              style={{ textShadow: "none", color: "#FFD700" }}
             >
-              PARA LIDERES E EMPRESÁRIOS COM RESULTADOS, QUE NAO SAO VISTOS NO TAMANHO QUE DEVERIAM SER.
+              PARA LÍDERES E EMPRESÁRIOS COM RESULTADOS, QUE NÃO SÃO VISTOS NO TAMANHO QUE DEVERIAM SER.
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="text-[clamp(15px,1.7vw,17px)] font-bold text-white max-w-[680px] mb-12 leading-relaxed"
+              className="text-[clamp(17px,2vw,21px)] font-black mb-12 leading-relaxed max-w-[940px]"
+              style={{ textShadow: "none", color: "#FFFFFF" }}
             >
               Você construiu competência. Construiu resultado. Mas continua sendo tratado como uma opção — e não como A referência — no seu mercado, na sua mesa, na sua família. A Mentoria AURA reconstrói sua Autoimagem, seu Posicionamento, sua Comunicação Magnética e sua Autoridade em Movimento nos 4 blocos da Jornada de 12 Semanas. No final, você não fala melhor. Você ocupa o lugar certo.
             </motion.p>
@@ -225,14 +242,14 @@ function AuraLandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
-              whileHover={{ y: -2, scale: 1.02 }}
-              className="inline-flex items-center gap-4 pl-6 pr-8 py-4 sm:py-5 rounded-sm font-editorial font-bold text-[18px] sm:text-[22px] transition-all duration-300 hover:brightness-110 text-black bg-[#00f2ff]"
+              whileHover={{ y: -2, scale: 1.05, boxShadow: "0 0 30px rgba(0,242,255,0.6)" }}
+              className="inline-flex items-center gap-4 pl-8 pr-10 py-5 sm:py-6 rounded-md font-bold text-[20px] sm:text-[24px] transition-all duration-300 hover:brightness-125 text-black bg-[#00f2ff] opacity-100 relative z-[60]"
               style={{
-                boxShadow: "none",
+                boxShadow: "0 0 20px rgba(0,242,255,0.4)",
               }}
             >
-              <MessageCircle size={18} strokeWidth={2.5} />
-              <span className="w-px h-5 bg-black/20" aria-hidden="true" />
+              <MessageCircle size={22} strokeWidth={3} />
+              <span className="w-px h-6 bg-black/20" aria-hidden="true" />
               Aplicar para a Sessão Estratégica
             </motion.a>
 
@@ -264,7 +281,7 @@ function AuraLandingPage() {
             />
             <div className="absolute inset-0 bg-[var(--aura-black)]/55 pointer-events-none" />
             <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--aura-black)] to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[var(--aura-black)] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />
           </div>
 
           <div className="max-w-[1040px] mx-auto w-full relative z-10">
@@ -296,89 +313,81 @@ function AuraLandingPage() {
               </p>
             </motion.div>
 
-            <Eyebrow>O Raio-X da Estagnação</Eyebrow>
-
-            {/* Hairline cards — U9 */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-2">
+            {/* Individual Dark Glass Cards — U9 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  num: "i.",
+                  icon: <TrendingDown size={22} className="text-[#FFD700]" />,
                   title: "Desvalorização Profissional",
                   desc: "Sem posicionamento, você é commodity. Substituível por preço, por agenda, por qualquer um.",
                 },
                 {
-                  num: "ii.",
+                  icon: <BadgeCheck size={22} className="text-[#FFD700]" />,
                   title: "O Nome como Ativo",
                   desc: "Seu nome e imagem são representações sociais. Se não geram valor imediato, você perde seu patrimônio mais caro: o Respeito.",
                 },
                 {
-                  num: "iii.",
+                  icon: <VolumeX size={22} className="text-[#FFD700]" />,
                   title: "O Gigante Silencioso",
                   desc: "De nada adianta um oceano de conhecimento se sua comunicação é um riacho raso. O mercado pune o invisível.",
                 },
                 {
-                  num: "iv.",
+                  icon: <ZapOff size={22} className="text-[#FFD700]" />,
                   title: "Impotência",
                   desc: "Possibilidades nas mãos, mas inércia por falta de planejamento. A baixa confiança te trava de expor talentos por medo do julgamento.",
                 },
                 {
-                  num: "v.",
+                  icon: <Ghost size={22} className="text-[#FFD700]" />,
                   title: "Síndrome do Impostor",
                   desc: "Habilidades de sobra, mas zero confiança em apresentar projetos por falta de narrativa e contexto claro.",
                 },
                 {
-                  num: "vi.",
+                  icon: <Brain size={22} className="text-[#FFD700]" />,
                   title: "Obesidade Mental",
                   desc: "Você sabe muito, mas não condensa em projetos. A procrastinação te faz empurrar com a barriga o que deveria ser o seu legado.",
                 },
                 {
-                  num: "vii.",
+                  icon: <EyeOff size={22} className="text-[#FFD700]" />,
                   title: "Sufocamento da Imagem",
                   desc: "O espelho não reflete quem você realmente se tornou. Sua imagem virou um reflexo embaçado.",
                 },
                 {
-                  num: "viii.",
+                  icon: <Lock size={22} className="text-[#FFD700]" />,
                   title: "Algemas de Ouro",
                   desc: "Preso a um trabalho ou situação por não ter coragem de empreender no que domina — simplesmente por não saber vender ou comunicar seu valor.",
                 },
               ].map((card, idx) => (
                 <motion.article
-                  key={card.num}
+                  key={idx}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.7, delay: idx * 0.06, ease: EASE_AURA }}
-                  className="group relative border-t border-white/[0.10] pt-8 pb-6 pr-2 transition-colors duration-500 hover:border-[var(--aura-gold)]/40"
+                  className="group relative p-8 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 hover:border-[#FFD700]/30 hover:bg-black/80 transition-all duration-500 shadow-xl"
                 >
                   <div
-                    className="num-tabular font-editorial text-[22px] text-[var(--aura-flame)] mb-4 leading-none"
+                    className="mb-8 flex items-center justify-center w-12 h-12 rounded-lg bg-white/[0.05] border border-white/[0.1] group-hover:bg-[#FFD700]/10 transition-colors duration-500"
                     aria-hidden="true"
                   >
-                    {card.num}
+                    {card.icon}
                   </div>
-                  <h3 className="text-[16px] font-bold text-[var(--aura-white)] mb-3 tracking-[-0.3px]">
+                  <h3 className="text-[17px] font-black text-white mb-3 tracking-[-0.3px] uppercase leading-tight">
                     {card.title}
                   </h3>
-                  <p className="text-[14px] opacity-70 leading-relaxed">{card.desc}</p>
+                  <p className="text-[14px] text-white/80 leading-relaxed font-medium">{card.desc}</p>
                 </motion.article>
               ))}
             </div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2, ease: EASE_AURA }}
-              className="mt-20 text-center p-10 rounded-sm relative border border-white/[0.08] bg-white/[0.02]"
+              className="mt-12 text-center"
             >
-              <p className="text-[clamp(17px,2vw,22px)] text-[var(--aura-cream)] leading-relaxed max-w-[800px] mx-auto">
-                Com uma{" "}
-                <strong className="text-[var(--aura-white)]">comunicação intencional</strong>,
-                tudo isso é resolvido. Quando você tem clareza de{" "}
-                <strong className="text-[var(--aura-white)]">
-                  quem é, o que faz, para quem faz e quanto vale
-                </strong>
-                , um mundo de possibilidades se abre.
+              <p className="text-[clamp(18px,2.4vw,28px)] font-black text-white max-w-[1040px] mx-auto leading-tight uppercase tracking-[-1px]">
+                Quando você tem clareza de quem é, o que faz, para quem faz e quanto vale, um mundo de possibilidades se abre.
               </p>
             </motion.div>
           </div>
@@ -399,6 +408,9 @@ function AuraLandingPage() {
             >
               <source src={`${ASSETS}/pinterest-video-03.mp4`} type="video/mp4" />
             </video>
+            {/* Confluence gradient — Top down to meet the previous section */}
+            <div className="absolute inset-x-0 top-0 h-[30%] bg-gradient-to-b from-black via-black/40 to-transparent pointer-events-none" />
+            
             {/* The original glowing blur element */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] bg-[var(--aura-fire)] opacity-[0.05] blur-[160px] pointer-events-none" />
           </div>

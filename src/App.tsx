@@ -173,9 +173,9 @@ function AuraLandingPage() {
               className="text-[clamp(28px,6vw,68px)] font-black leading-[0.95] tracking-[-1px] md:tracking-[-3px] text-white max-w-[1100px] mb-8 uppercase"
               style={{ textShadow: "none" }}
             >
-              <span className="block whitespace-nowrap">ATIVE SEU POSICIONAMENTO,</span>
-              <span className="block whitespace-nowrap">DOMINE SUA COMUNICAÇÃO</span>
-              <span className="block whitespace-nowrap">PRESENÇA NA VIDA E NOS NEGÓCIOS</span>
+              <span className="block md:whitespace-nowrap">ATIVE SEU POSICIONAMENTO,</span>
+              <span className="block md:whitespace-nowrap">DOMINE SUA COMUNICAÇÃO</span>
+              <span className="block md:whitespace-nowrap">E PRESENÇA NA VIDA E NOS NEGÓCIOS</span>
             </motion.h1>
 
             <motion.div

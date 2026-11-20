@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ThemeProvider } from "@figma/astraui";
 import "@figma/astraui/styles.css";
 import { motion, MotionConfig, useScroll, useTransform, useReducedMotion } from "motion/react";
@@ -12,15 +12,199 @@ import {
   Ghost,
   Brain,
   EyeOff,
-  Lock
+  Lock,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 
 const ASSETS = "https://eusouaugusttoleao.github.io/augustto-aura-assets";
 const heroImg = `${ASSETS}/augustto-palco-frente.jpg`;
 
+const TESTIMONIALS = [
+  {
+    id: "emerson-ventura",
+    name: "Emerson Ventura",
+    role: "CEO & Presidente Luci Luci · Empresário e Conselheiro",
+    location: "Camboriú - SC",
+    image: "/cases/endorse-emerson.webp",
+    headline: "Uma das maiores autoridades no país em energia de palco. Faturamos mais de R$ 100M juntos.",
+    quote:
+      "Augustto é um profissional multifacetado. Uma das maiores autoridades no país em energia de palco. Foi meu CMO no ano em que faturamos mais de 100 milhões de reais, consolidamos a melhor criação perfumística da América Latina, e impactamos centenas de milhares de vidas no Brasil e no mundo.",
+    badge: "Endosso Institucional Master",
+    metrics: ["CMO R$ 100M+ Faturamento", "Expansão América Latina"],
+    color: "#FFD700",
+  },
+  {
+    id: "kaue-petry",
+    name: "Kauê Petry",
+    role: "Empresário & Fundador · 3 Operações Consolidadas",
+    location: "Itapema - SC",
+    image: "/cases/case-01-kaue.webp",
+    headline: "De vendedor no marketplace para empresário multimilionário com 3 operações consolidadas.",
+    quote:
+      "Começou vendendo iPhone em casa via marketplace do Facebook; com a modelagem de postura e presença ASP®, hoje fatura milhões e comanda 3 operações consolidadas.",
+    badge: "Modelagem de Postura & Presença",
+    metrics: ["Multi-operações", "7 Dígitos Faturamento"],
+    color: "#4ADE80",
+  },
+  {
+    id: "bruno-bessa",
+    name: "Dr. Bruno Bessa",
+    role: "Médico Especialista em Alta Performance",
+    location: "Brasília - DF",
+    image: "/cases/case-bruno-bessa.webp",
+    headline: "Virada de chave imediata: de R$ 3.000 para mais de R$ 16.000 por protocolo.",
+    quote:
+      "Após uma sessão com Augustto, tive uma virada de chave onde saí de R$ 3.000 de um protocolo para mais de R$ 16.000, ajustando minha oferta e público.",
+    badge: "Reposicionamento de Alto Valor",
+    metrics: ["R$ 3k → R$ 16k", "Ticket +5x"],
+    color: "#4ADE80",
+  },
+  {
+    id: "tony-burses",
+    name: "Tony Burses",
+    role: "Infoprodutor & Criador de Conteúdo",
+    location: "São Paulo - SP",
+    image: "/cases/case-03-tony.webp",
+    headline: "De aluno de mentoria individual a um dos maiores infoprodutores do país.",
+    quote:
+      "Aluno de mentoria individual com Augustto em 2020. Hoje é um dos maiores infoprodutores do país e referência internacional de estilo de vida.",
+    badge: "Aluno 1:1 · Mentoria Individual",
+    metrics: ["Tier S Nacional", "Referência Internacional"],
+    color: "#FFD700",
+  },
+  {
+    id: "bruno-criativo",
+    name: "Bruno Criativo",
+    role: "Estrategista de Branding & Criador (@criativobruno)",
+    location: "Brasília - DF",
+    image: "/cases/case-02-bruno.webp",
+    headline: "-50kg, virada de autoimagem e autoridade nacional em branding viral.",
+    quote:
+      "Mudou radicalmente sua autoimagem, eliminando mais de 50kg, aplicando constância em sua única coisa, tornou-se uma das maiores autoridades do país em branding para marcas virais.",
+    badge: "Autoimagem & Presença Viral",
+    metrics: ["-50kg & Autoimagem", "Branding Viral"],
+    color: "#8B5CF6",
+  },
+  {
+    id: "luis-felipe",
+    name: "Luis Felipe",
+    role: "CEO Rede de Combustíveis & Investidor",
+    location: "Rio de Janeiro - RJ",
+    image: "/cases/case-05-luis-felipe.webp",
+    headline: "Aluno 1:1 há 5 anos; hoje comanda rede de postos e múltiplos ativos físicos.",
+    quote:
+      "Aluno de mentoria 1:1 de 5 anos atrás; hoje dono de rede de postos de gasolina e múltiplos ativos físicos consolidados.",
+    badge: "Patrimônio & Negócios Físicos",
+    metrics: ["Ativos Físicos", "Rede de Postos"],
+    color: "#00E5FF",
+  },
+  {
+    id: "nata-kesller",
+    name: "Natã Kesller",
+    role: "Fotógrafo Profissional & Criador (@nkesller)",
+    location: "Brasília - DF",
+    image: "/cases/case-08-nata.webp",
+    headline: "Desde 2016 aplicando as bases de postura, liderança e energia com os seus.",
+    quote:
+      "Desde 2016 quando fazíamos vendas diretas juntos, Augustto sempre atuou com liderança, visão e energia com os dele. Aprendi muito e hoje aplico em minha profissão base do que aplicávamos naquele tempo.",
+    badge: "Aliança desde 2016",
+    metrics: ["@nkesller", "Parceria Histórica"],
+    color: "#FFD700",
+  },
+  {
+    id: "amil-oliveira",
+    name: "Amil de Oliveira",
+    role: "Advogado Empresarial & Estrategista",
+    location: "Santarém - PA",
+    image: "/cases/case-amil.webp",
+    headline: "Uma união única de comunicação, presença, mentalidade e reprogramação.",
+    quote:
+      "Augustto tem uma forma única de unir comunicação, presença, imagem, mentalidade e energia através de sua metodologia e reprogramação.",
+    badge: "Advocacia Corporativa",
+    metrics: ["Reprogramação", "Presença Magnética"],
+    color: "#8B5CF6",
+  },
+  {
+    id: "gabriel-breier",
+    name: "Gabriel Breier",
+    role: "Criador de Conteúdo & Fitness Leader",
+    location: "Florianópolis - SC",
+    image: "/cases/case-gabriel-breier.webp",
+    headline: "O Leão é unânime quando o assunto é marketing pessoal e presença de palco.",
+    quote:
+      "O Leão é unânime quando o assunto é marketing pessoal e presença. Vi ao vivo o impacto que ele consegue gerar em seus treinamentos e reprogramações.",
+    badge: "Marketing Pessoal & Impacto",
+    metrics: ["Marketing Pessoal", "Impacto Ao Vivo"],
+    color: "#00E5FF",
+  },
+  {
+    id: "gabriel-fernandes",
+    name: "Gabriel Fernandes",
+    role: "Empresário Internacional",
+    location: "Bruxelas · Bélgica",
+    image: "/cases/case-gabriel-fernandes.webp",
+    headline: "Mais de 10 anos vendo o Augustto quebrar recordes e liderar pelo exemplo.",
+    quote:
+      "Além de um grande ativador, é um grande amigo. São mais de 10 anos que vejo ele quebrar recordes e criar impacto genuíno em todos os negócios que participou. Augustto é uma autoridade em posicionamento e presença.",
+    badge: "Escala Internacional",
+    metrics: ["Escala Internacional", "Aliança 10+ Anos"],
+    color: "#4ADE80",
+  },
+] as const;
+
 // Signature easing curves (U10)
 const EASE_AURA = [0.22, 1, 0.36, 1] as const;
 const EASE_REVEAL = [0.16, 1, 0.3, 1] as const;
+
+/**
+ * Carrega e reproduz vídeos abaixo da dobra apenas quando se aproximam do viewport,
+ * evitando disputa de banda com a Hero e reduzindo uso de CPU/GPU em background.
+ */
+function LazyVideo({
+  src,
+  className = "",
+}: {
+  src: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      autoPlay={shouldLoad}
+      loop
+      muted
+      playsInline
+      preload={shouldLoad ? "metadata" : "none"}
+      className={className}
+    >
+      {shouldLoad && <source src={src} type="video/mp4" />}
+    </video>
+  );
+}
 
 // --- Brand & Ornament Components ---
 
@@ -82,6 +266,12 @@ function AuraLandingPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const prefersReducedMotion = useReducedMotion();
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const currentCase = TESTIMONIALS[activeTestimonial];
+  const prevTestimonial = () =>
+    setActiveTestimonial((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
+  const nextTestimonial = () =>
+    setActiveTestimonial((prev) => (prev === TESTIMONIALS.length - 1 ? 0 : prev + 1));
 
   return (
     <div
@@ -119,7 +309,8 @@ function AuraLandingPage() {
             </video>
             {/* Purple/Aurora Glow for Hero branding context */}
             <div
-              className="absolute -bottom-48 -right-48 w-96 h-96 bg-[#8B5CF6] opacity-[0.18] blur-[120px] pointer-events-none"
+              className="absolute -bottom-48 -right-48 w-[640px] h-[640px] opacity-[0.18] pointer-events-none"
+              style={{ background: "radial-gradient(circle, #8B5CF6 0%, transparent 70%)" }}
               aria-hidden="true"
             />
           </div>
@@ -424,15 +615,10 @@ function AuraLandingPage() {
           className="py-24 md:py-32 px-6 relative overflow-hidden"
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
+            <LazyVideo
+              src={`${ASSETS}/pinterest-video-03.mp4`}
               className="absolute inset-0 w-full h-full object-cover object-center"
-            >
-              <source src={`${ASSETS}/pinterest-video-03.mp4`} type="video/mp4" />
-            </video>
+            />
             {/* Added Black Glass Scrim for contrast */}
             <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] pointer-events-none" />
 
@@ -440,7 +626,10 @@ function AuraLandingPage() {
             <div className="absolute inset-x-0 top-0 h-[30%] bg-gradient-to-b from-black via-black/40 to-transparent pointer-events-none" />
 
             {/* The original glowing blur element */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] bg-[var(--aura-fire)] opacity-[0.05] blur-[160px] pointer-events-none" />
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] opacity-[0.06] pointer-events-none"
+              style={{ background: "radial-gradient(ellipse at center, var(--aura-fire) 0%, transparent 70%)" }}
+            />
           </div>
 
           <div className="max-w-[1040px] mx-auto w-full relative z-10">
@@ -509,25 +698,22 @@ function AuraLandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.8, delay: idx * 0.12, ease: EASE_AURA }}
-                  className="group relative rounded-[2rem] bg-white/[0.03] backdrop-blur-[40px] border border-white/[0.1] p-10 lg:p-14 overflow-hidden shadow-2xl transition-all duration-700 hover:border-white/20"
+                  className="group relative rounded-[2rem] bg-white/[0.03] backdrop-blur-md border border-white/[0.1] p-10 lg:p-14 overflow-hidden shadow-2xl transition-all duration-700 hover:border-white/20"
                 >
                   {/* Background Content (Image or Video) — U9 */}
                   {(pilar.img || pilar.video) && (
                     <div className="absolute inset-0 z-0">
                       {pilar.video ? (
-                        <video
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
+                        <LazyVideo
+                          src={pilar.video}
                           className="w-full h-full object-cover opacity-20 filter grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-1000"
-                        >
-                          <source src={pilar.video} type="video/mp4" />
-                        </video>
+                        />
                       ) : (
                         <img
                           src={pilar.img}
                           alt=""
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover opacity-20 filter grayscale group-hover:grayscale-0 group-hover:scale-105 group-hover:opacity-40 transition-all duration-1000 ease-out"
                           style={{ objectPosition: pilar.pos || 'center' }}
                         />
@@ -824,7 +1010,7 @@ function AuraLandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.7, delay: idx * 0.08, ease: EASE_AURA }}
-                  className="group relative bg-white/[0.03] backdrop-blur-[35px] border border-white/[0.08] rounded-[2rem] p-8 sm:p-12 overflow-hidden transition-all duration-700 hover:border-white/20 hover:bg-white/[0.05]"
+                  className="group relative bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-[2rem] p-8 sm:p-12 overflow-hidden transition-all duration-700 hover:border-white/20 hover:bg-white/[0.05]"
                 >
                   {/* Glow Hotspot matching the block color */}
                   <div
@@ -894,6 +1080,186 @@ function AuraLandingPage() {
 
 
 
+        {/* ─── SEÇÃO 06 — DEPOIMENTOS ─── */}
+        <section
+          aria-labelledby="section-depoimentos"
+          className="py-24 md:py-36 px-6 bg-[var(--aura-black)] relative overflow-hidden border-t border-white/[0.06]"
+        >
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[70vw] h-[420px] opacity-[0.07] pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at top, ${currentCase.color} 0%, transparent 70%)` }}
+            aria-hidden="true"
+          />
+
+          <div className="max-w-[1140px] mx-auto w-full relative z-10">
+            <div className="flex flex-col items-center text-center mb-16">
+              <Eyebrow>Quem Já Viveu a Metodologia</Eyebrow>
+              <h2
+                id="section-depoimentos"
+                className="text-[clamp(28px,4.5vw,52px)] font-extrabold tracking-[-1px] md:tracking-[-1.5px] text-[var(--aura-white)] mb-4 max-w-[820px] leading-tight"
+              >
+                Não é Teoria de Palco.{" "}
+                <span className="font-editorial text-[var(--aura-gold)]">
+                  Resultados Reais
+                </span>
+                .
+              </h2>
+              <p className="text-[clamp(14px,1.5vw,17px)] text-[var(--aura-cream)] opacity-65 max-w-[680px] leading-relaxed">
+                Depoimentos de empresários, médicos, executivos e líderes que ajustaram postura, posicionamento e presença com o Augustto.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+              {/* Spotlight Card */}
+              <div className="lg:col-span-7 rounded-[2rem] bg-white/[0.03] backdrop-blur-md border border-white/[0.1] p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+                <div
+                  className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[80%] h-40 opacity-20 pointer-events-none transition-all duration-500"
+                  style={{ background: `radial-gradient(ellipse at bottom, ${currentCase.color} 0%, transparent 70%)` }}
+                  aria-hidden="true"
+                />
+
+                <div className="space-y-6 relative z-10">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[2.5px] bg-white/[0.05] border border-white/10"
+                      style={{ color: currentCase.color }}
+                    >
+                      <BadgeCheck size={14} />
+                      {currentCase.badge}
+                    </span>
+
+                    <div className="flex items-center gap-3">
+                      <span className="num-tabular text-[11px] font-bold tracking-[2px] text-white/50">
+                        {String(activeTestimonial + 1).padStart(2, "0")} / {String(TESTIMONIALS.length).padStart(2, "0")}
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={prevTestimonial}
+                          aria-label="Depoimento anterior"
+                          className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/[0.12] text-white flex items-center justify-center transition-colors cursor-pointer"
+                        >
+                          <ChevronLeft size={16} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={nextTestimonial}
+                          aria-label="Próximo depoimento"
+                          className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/[0.12] text-white flex items-center justify-center transition-colors cursor-pointer"
+                        >
+                          <ChevronRight size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-[clamp(20px,2.4vw,28px)] font-extrabold text-white leading-snug tracking-[-0.5px]">
+                    "{currentCase.headline}"
+                  </h3>
+
+                  <p className="text-[15px] sm:text-[16px] text-[var(--aura-cream)] opacity-80 leading-relaxed font-light">
+                    "{currentCase.quote}"
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {currentCase.metrics.map((metric) => (
+                      <span
+                        key={metric}
+                        className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/[0.05] border border-white/10 text-white/85"
+                      >
+                        {metric}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 mt-8 border-t border-white/10 flex items-center gap-4 relative z-10">
+                  <div
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 shrink-0 bg-black/50"
+                    style={{ borderColor: `${currentCase.color}80` }}
+                  >
+                    <img
+                      src={currentCase.image}
+                      alt={currentCase.name}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-[18px] sm:text-[20px] font-black text-white leading-tight">
+                      {currentCase.name}
+                    </h4>
+                    <p className="text-[13px] text-[var(--aura-cream)] opacity-70 leading-snug mt-0.5">
+                      {currentCase.role}
+                    </p>
+                    <span
+                      className="inline-block text-[11px] font-bold uppercase tracking-[1.5px] mt-1"
+                      style={{ color: currentCase.color }}
+                    >
+                      {currentCase.location}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Author Rail — Lista de todos os 10 casos */}
+              <div className="lg:col-span-5 rounded-[2rem] bg-white/[0.02] border border-white/[0.08] p-4 sm:p-5 flex flex-col">
+                <div className="flex items-center justify-between px-2 pb-3 mb-3 border-b border-white/[0.08]">
+                  <span className="uppercase text-[10px] tracking-[3px] font-black text-white/60">
+                    Cases Verificados
+                  </span>
+                  <span className="text-[11px] font-semibold text-[var(--aura-gold)]">
+                    {TESTIMONIALS.length} histórias
+                  </span>
+                </div>
+
+                <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
+                  {TESTIMONIALS.map((item, idx) => {
+                    const isActive = idx === activeTestimonial;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setActiveTestimonial(idx)}
+                        className={`w-full text-left p-3 rounded-2xl border transition-all duration-300 flex items-center gap-3.5 cursor-pointer ${
+                          isActive
+                            ? "bg-white/[0.08] border-white/25"
+                            : "bg-transparent border-transparent hover:bg-white/[0.04] hover:border-white/10"
+                        }`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-11 h-11 rounded-xl object-cover object-top shrink-0 border border-white/15"
+                        />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[14px] font-bold text-white truncate">
+                              {item.name}
+                            </span>
+                            {isActive && (
+                              <span
+                                className="w-2 h-2 rounded-full shrink-0"
+                                style={{ backgroundColor: item.color }}
+                              />
+                            )}
+                          </div>
+                          <p className="text-[12px] text-white/55 truncate">
+                            {item.role}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ─── SEÇÃO 07 — GARANTIA ─── */}
         <section
           aria-labelledby="section-garantia"
@@ -904,6 +1270,8 @@ function AuraLandingPage() {
             <img
               src="https://eusouaugusttoleao.github.io/augustto-aura-assets/augustto-retrato-oculos.jpg"
               alt=""
+              loading="lazy"
+              decoding="async"
               className="absolute left-0 w-full h-[115%] -top-[8%] md:-top-[12%] object-cover object-[center_top] opacity-40 mix-blend-luminosity md:mix-blend-normal md:opacity-80"
             />
             {/* Fade lateral (transição sutil para a cor de fundo) direcionando atenção para a garantia */}
@@ -981,7 +1349,7 @@ function AuraLandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.12, ease: EASE_AURA }}
-                  className="group relative p-10 rounded-[2.5rem] bg-white/20 backdrop-blur-[24px] border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                  className="group relative p-10 rounded-[2.5rem] bg-white/20 backdrop-blur-md border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                 >
                   {/* Subtle Inner Glow */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -1004,15 +1372,10 @@ function AuraLandingPage() {
           className="py-32 md:py-48 px-6 relative overflow-hidden flex flex-col items-center justify-center text-center"
         >
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
+            <LazyVideo
+              src="https://github.com/eusouaugusttoleao/mentoria-aura/releases/download/v1.0-assets/acabamento-site-comprimido.mp4"
               className="absolute inset-0 w-full h-full object-cover object-center"
-            >
-              <source src="https://github.com/eusouaugusttoleao/mentoria-aura/releases/download/v1.0-assets/acabamento-site-comprimido.mp4" type="video/mp4" />
-            </video>
+            />
           </div>
 
           <div className="max-w-[780px] mx-auto w-full relative z-10 flex flex-col items-center">

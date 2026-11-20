@@ -601,7 +601,7 @@ function AuraLandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.7, delay: idx * 0.06, ease: EASE_AURA }}
-                  className="group relative p-8 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 hover:border-white/30 hover:bg-black/80 transition-all duration-500 shadow-xl"
+                  className="group relative p-8 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-black/80 transition-all duration-500 shadow-xl h-full flex flex-col"
                 >
                   <div className="absolute -bottom-12 -right-12 w-24 h-24 opacity-0 group-hover:opacity-[0.1] blur-3xl transition-opacity duration-700 pointer-events-none" style={{ backgroundColor: card.color }} />
 
@@ -892,22 +892,21 @@ function AuraLandingPage() {
                   </p>
                 </div>
 
-                {/* Stats with hairline — U16 */}
-                <div className="grid grid-cols-3 gap-6 pt-8">
+                {/* Stats with hairline + vertical dividers — U16 */}
+                <div className="grid grid-cols-3 gap-0 pt-8 border-t border-white/10">
                   {[
                     { num: "100M+", label: "Movimentados · 2024" },
                     { num: "100k", label: "Pessoas lideradas" },
                     { num: "10+", label: "Anos de método" },
                   ].map((stat, i) => (
-                    <div key={i} className="relative pt-4">
-                      <div
-                        className="absolute top-0 left-0 w-8 h-[1px] bg-[var(--aura-gold)] opacity-60"
-                        aria-hidden="true"
-                      />
+                    <div
+                      key={i}
+                      className={`relative pt-2 ${i > 0 ? "border-l border-white/10 pl-4 sm:pl-6" : "pr-4 sm:pr-6"}`}
+                    >
                       <div className="num-tabular text-[clamp(20px,3vw,32px)] font-extrabold tracking-[-1px] text-[var(--aura-gold)] mb-2">
                         {stat.num}
                       </div>
-                      <div className="uppercase text-[11px] tracking-[1.5px] opacity-60 max-w-[140px] leading-snug">
+                      <div className="uppercase text-[10px] sm:text-[11px] tracking-[1.5px] opacity-60 max-w-[140px] leading-snug">
                         {stat.label}
                       </div>
                     </div>
@@ -1038,24 +1037,11 @@ function AuraLandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.7, delay: idx * 0.08, ease: EASE_AURA }}
-                  className="group relative bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-[2rem] p-8 sm:p-12 overflow-hidden transition-all duration-700 hover:border-white/20 hover:bg-white/[0.05]"
+                  className="group relative bg-[#111111]/90 border border-white/[0.08] border-t-2 rounded-2xl p-8 sm:p-10 overflow-hidden transition-all duration-500 hover:border-white/20 hover:bg-[#141414]"
+                  style={{ borderTopColor: bloco.color }}
                 >
-                  {/* Glow Hotspot matching the block color */}
                   <div
-                    className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-32 blur-[60px] opacity-0 group-hover:opacity-40 transition-opacity duration-1000 pointer-events-none"
-                    style={{
-                      background: `linear-gradient(to top, ${bloco.color}, transparent)`
-                    }}
-                  />
-                  <div
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40%] h-6 blur-[10px] opacity-0 group-hover:opacity-80 transition-opacity duration-1000 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(ellipse at bottom, white 0%, transparent 70%)`
-                    }}
-                  />
-
-                  <div
-                    className="absolute top-4 right-10 font-editorial num-tabular text-[100px] opacity-[0.25] leading-none select-none pointer-events-none transition-all duration-1000 group-hover:opacity-100 group-hover:scale-110"
+                    className="absolute top-4 right-8 font-editorial num-tabular text-[84px] opacity-[0.2] leading-none select-none pointer-events-none transition-all duration-700 group-hover:opacity-60"
                     style={{ color: bloco.color }}
                     aria-hidden="true"
                   >
@@ -1474,16 +1460,16 @@ function AuraLandingPage() {
               </p>
             </div>
 
-            <div className="w-full max-w-[500px] text-left mb-16 space-y-4">
+            <div className="w-full max-w-[760px] text-left mb-14 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {[
                 "Você envia uma mensagem pelo botão abaixo (1 min)",
                 "Nossa equipe contata em até 24h úteis via WhatsApp",
                 "Se houver fit, agendamos sua Sessão com Augustto ou Talita",
                 "Diagnosticamos sua autoridade percebida e definimos o próximo passo"
               ].map((passo, idx) => (
-                <div key={idx} className="flex gap-4 items-start bg-white/[0.02] p-4 rounded-sm border border-white/[0.05]">
-                  <span className="text-[var(--aura-gold)] font-bold num-tabular">{idx + 1}.</span>
-                  <span className="text-[var(--aura-cream)] opacity-90 text-[14px]">{passo}</span>
+                <div key={idx} className="flex gap-3.5 items-start bg-white/[0.03] backdrop-blur-sm p-4 rounded-xl border border-white/[0.08]">
+                  <span className="text-[var(--aura-gold)] font-bold num-tabular shrink-0">{idx + 1}.</span>
+                  <span className="text-[var(--aura-cream)] opacity-90 text-[14px] leading-snug">{passo}</span>
                 </div>
               ))}
             </div>
@@ -1506,8 +1492,31 @@ function AuraLandingPage() {
       {/* ─── FOOTER — Colophon editorial (U20) ─── */}
       <footer className="py-16 px-6 text-center bg-[var(--aura-black)] relative z-10 border-t border-white/[0.06]">
         <div className="max-w-[1040px] mx-auto flex flex-col items-center gap-8">
-          <div className="text-[var(--aura-gold)]/70">
-            <AuraLogo className="h-7 w-auto" ariaLabel="AURA" />
+          <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap">
+            <img
+              src="/brands/logo-asp.png"
+              alt="ASP"
+              loading="lazy"
+              decoding="async"
+              className="h-4 sm:h-5 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+            />
+            <div className="text-white/60 hover:text-white transition-opacity">
+              <AuraLogo className="h-4 sm:h-5 w-auto" ariaLabel="AURA" />
+            </div>
+            <img
+              src="/brands/logo-leao.png"
+              alt="Augustto Leão"
+              loading="lazy"
+              decoding="async"
+              className="h-5 sm:h-6 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="/brands/logo-sellect-light.png"
+              alt="Sellect Inteligência"
+              loading="lazy"
+              decoding="async"
+              className="h-4 sm:h-5 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+            />
           </div>
 
           <div className="text-[10px] tracking-[2px] uppercase opacity-55 text-[var(--aura-cream)] flex flex-col gap-2">

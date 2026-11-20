@@ -5,7 +5,7 @@
 
   /* ─── AURA Type Families ─── */
   --font-sans:      'Poppins', system-ui, -apple-system, sans-serif;
-  --font-editorial: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
 
   /* ─── AURA Color System — Graphite Edition ─── */
   --aura-black:     #070707;

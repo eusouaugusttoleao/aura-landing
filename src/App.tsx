@@ -19,6 +19,27 @@ import {
 
 const ASSETS = "https://eusouaugusttoleao.github.io/augustto-aura-assets";
 const heroImg = `${ASSETS}/augustto-palco-frente.jpg`;
+const TYPEBOT_URL = "https://typebot.co/mentoria-aura";
+
+/**
+ * Botão principal unificado da Mentoria AURA (Hero e CTA Final).
+ */
+function AuraCTA({ className = "" }: { className?: string }) {
+  return (
+    <motion.a
+      href={TYPEBOT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ y: -2, scale: 1.03, boxShadow: "0 0 30px rgba(0,242,255,0.55)" }}
+      className={`inline-flex items-center justify-center gap-3.5 px-7 sm:px-9 py-4 sm:py-5 rounded-md font-bold text-[16px] sm:text-[19px] transition-all duration-300 hover:brightness-110 text-black bg-[#00f2ff] ${className}`}
+      style={{ boxShadow: "0 0 20px rgba(0,242,255,0.32)" }}
+    >
+      <MessageCircle size={20} strokeWidth={2.5} />
+      <span className="w-px h-5 bg-black/20" aria-hidden="true" />
+      <span>Aplicar para a Sessão Estratégica</span>
+    </motion.a>
+  );
+}
 
 const TESTIMONIALS = [
   {
@@ -267,6 +288,15 @@ function AuraLandingPage() {
   const heroY = useTransform(scrollYProgress, [0, 0.4], [0, -50]);
   const prefersReducedMotion = useReducedMotion();
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShowStickyBar(window.scrollY > 560);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const currentCase = TESTIMONIALS[activeTestimonial];
   const prevTestimonial = () =>
     setActiveTestimonial((prev) => (prev === 0 ? TESTIMONIALS.length - 1 : prev - 1));
@@ -289,6 +319,32 @@ function AuraLandingPage() {
 
       {/* Noise grain overlay — U14 */}
       <GrainOverlay />
+
+      {/* Barra flutuante discreta pós-Hero */}
+      <div
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          showStickyBar
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-full pointer-events-none"
+        }`}
+      >
+        <div className="bg-[#070707]/85 backdrop-blur-md border-b border-white/10 px-5 sm:px-8 py-3">
+          <div className="max-w-[1140px] mx-auto flex items-center justify-between gap-4">
+            <a href="#main" className="text-white/90 hover:text-white transition-colors" aria-label="Topo AURA">
+              <AuraLogo className="h-5 sm:h-6 w-auto" ariaLabel="AURA" />
+            </a>
+            <a
+              href={TYPEBOT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-md bg-[#00f2ff] text-black font-bold text-[12px] sm:text-[13px] uppercase tracking-[1px] hover:brightness-110 transition-all"
+            >
+              <MessageCircle size={14} strokeWidth={2.5} />
+              <span>Aplicar</span>
+            </a>
+          </div>
+        </div>
+      </div>
 
       <main id="main">
         {/* ─── SEÇÃO 01 — HERO ─── */}
@@ -316,25 +372,25 @@ function AuraLandingPage() {
           </div>
 
           <motion.div
-            className="relative z-50 w-full max-w-[1040px] mx-auto flex flex-col items-center text-center mt-6"
+            className="relative z-40 w-full max-w-[1140px] mx-auto flex flex-col items-center text-center mt-2"
             style={{ opacity: 1 }}
           >
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: EASE_REVEAL }}
-              className="mb-8 text-white flex flex-col items-center"
+              className="mb-10 text-white flex flex-col items-center"
             >
               <div
-                className="uppercase text-[11px] tracking-[4px] text-white/50 mb-6 font-editorial"
-                style={{ fontWeight: 200 }}
+                className="uppercase text-[11px] tracking-[4px] text-white/50 mb-4 font-editorial"
+                style={{ fontWeight: 400 }}
               >
                 Mentoria e Protocolo
               </div>
-              <AuraLogo className="h-20 sm:h-24 w-auto mb-2 opacity-30" ariaLabel="AURA" />
+              <AuraLogo className="h-16 sm:h-20 w-auto mb-2 opacity-35" ariaLabel="AURA" />
               <div
-                className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-white font-editorial"
-                style={{ textShadow: "none", fontWeight: 200 }}
+                className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-white/80 font-editorial"
+                style={{ textShadow: "none", fontWeight: 400 }}
               >
                 <span>Ativação</span>
                 <span className="opacity-40" aria-hidden="true">·</span>
@@ -346,124 +402,93 @@ function AuraLandingPage() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.15, ease: EASE_REVEAL }}
-              className="inline-block px-5 py-2 uppercase text-[11px] font-bold tracking-[3px] text-[#FFD700] mb-6 bg-white/[0.12] backdrop-blur-xl rounded-full border border-white/20"
-              style={{ textShadow: "none" }}
-            >
-              Seja protagonista da sua história - por augustto leao
-            </motion.div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
+              <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+                <motion.div
+                  initial={{ opacity: 0, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.15, ease: EASE_REVEAL }}
+                  className="inline-block px-5 py-2 uppercase text-[11px] font-bold tracking-[2.5px] text-[#FFD700] mb-6 bg-white/[0.1] backdrop-blur-md rounded-full border border-white/20"
+                  style={{ textShadow: "none" }}
+                >
+                  Seja protagonista da sua história · por Augustto Leão
+                </motion.div>
 
-            <motion.h1
-              id="hero-heading"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: EASE_REVEAL }}
-              className="text-[clamp(28px,6vw,68px)] font-black leading-[0.95] tracking-[-1px] md:tracking-[-3px] text-white max-w-[1100px] mb-8 uppercase"
-              style={{ textShadow: "none" }}
-            >
-              <span className="block md:whitespace-nowrap">ATIVE SEU POSICIONAMENTO,</span>
-              <span className="block md:whitespace-nowrap">DOMINE SUA COMUNICAÇÃO</span>
-              <span className="block md:whitespace-nowrap">E PRESENÇA NA VIDA E NOS NEGÓCIOS</span>
-            </motion.h1>
+                <motion.h1
+                  id="hero-heading"
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.2, ease: EASE_REVEAL }}
+                  className="text-[clamp(28px,4.5vw,56px)] font-black leading-[0.98] tracking-[-1px] md:tracking-[-2px] text-white mb-6 uppercase"
+                  style={{ textShadow: "none" }}
+                >
+                  ATIVE SEU POSICIONAMENTO, DOMINE SUA COMUNICAÇÃO E PRESENÇA NA VIDA E NOS NEGÓCIOS
+                </motion.h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.35 }}
-              className="text-[clamp(15px,2vw,20px)] text-white mb-10 max-w-[1100px] uppercase font-editorial"
-              style={{ textShadow: "none", fontWeight: 200, fontStyle: 'italic', letterSpacing: '4px' }}
-            >
-              EM 12 SEMANAS VEJA O REFLEXO DA SUA AUTORIDADE ALINHADA COM SUA COMPETÊNCIA.
-            </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.35 }}
+                  className="text-[clamp(16px,1.8vw,22px)] text-white/90 mb-8 max-w-[680px] font-editorial italic tracking-[1px]"
+                  style={{ textShadow: "none", fontWeight: 400 }}
+                >
+                  Em 12 semanas veja o reflexo da sua autoridade alinhada com sua competência.
+                </motion.div>
 
+                <motion.p
+                  initial={{ opacity: 0, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.45 }}
+                  className="text-[clamp(16px,2vw,21px)] font-extrabold mb-4 max-w-[680px] leading-snug uppercase"
+                  style={{ textShadow: "none", color: "#FFD700" }}
+                >
+                  PARA LÍDERES E EMPRESÁRIOS COM RESULTADOS, QUE NÃO SÃO VISTOS NO TAMANHO QUE DEVERIAM SER.
+                </motion.p>
 
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="text-[clamp(15px,1.5vw,17px)] font-normal text-white/80 mb-8 leading-relaxed max-w-[660px]"
+                  style={{ textShadow: "none" }}
+                >
+                  Você construiu competência. Construiu resultado. Mas continua sendo tratado como uma opção — e não como A referência — no seu mercado, na sua mesa, na sua família. A Mentoria AURA reconstrói sua Autoimagem, seu Posicionamento, sua Comunicação Magnética e sua Autoridade em Movimento nos 4 blocos da Jornada de 12 Semanas. No final, você não fala melhor. Você ocupa o lugar certo.
+                </motion.p>
 
-            {/* Espaço para o Vídeo do YouTube */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.45 }}
-              className="w-full max-w-[320px] sm:max-w-[360px] mt-4 mb-8 rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/20"
-            >
-              <div className="relative w-full aspect-[9/16] bg-black/50 backdrop-blur-sm">
-                <iframe
-                  className="absolute inset-0 w-full h-full pointer-events-auto"
-                  src="https://www.youtube.com/embed/MbXZsn2mP60?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=MbXZsn2mP60"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <div className="flex flex-col items-center lg:items-start w-full">
+                  <AuraCTA className="relative z-[60]" />
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.7 }}
+                    className="mt-5 text-[11px] uppercase tracking-[2px] opacity-70 font-semibold"
+                  >
+                    MESA LIMITADA A 33 MEMBROS POR SEMESTRE · PROCESSO SELETIVO
+                  </motion.div>
+                </div>
               </div>
-            </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="text-[clamp(20px,2.8vw,30px)] font-black mb-6 max-w-[940px] leading-tight uppercase"
-              style={{ textShadow: "none", color: "#FFD700" }}
-            >
-              PARA LÍDERES E EMPRESÁRIOS COM RESULTADOS, QUE NÃO SÃO VISTOS NO TAMANHO QUE DEVERIAM SER.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="text-[clamp(17px,2vw,21px)] font-black mb-12 leading-relaxed max-w-[940px]"
-              style={{ textShadow: "none", color: "#FFFFFF" }}
-            >
-              Você construiu competência. Construiu resultado. Mas continua sendo tratado como uma opção — e não como A referência — no seu mercado, na sua mesa, na sua família. A Mentoria AURA reconstrói sua Autoimagem, seu Posicionamento, sua Comunicação Magnética e sua Autoridade em Movimento nos 4 blocos da Jornada de 12 Semanas. No final, você não fala melhor. Você ocupa o lugar certo.
-            </motion.p>
-
-            {/* Keyword row — U11 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="mb-12 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-[var(--aura-gold)]/70"
-            >
-              <span>Ativação</span>
-              <span className="opacity-40" aria-hidden="true">·</span>
-              <span>Unicidade</span>
-              <span className="opacity-40" aria-hidden="true">·</span>
-              <span>Respeito</span>
-              <span className="opacity-40" aria-hidden="true">·</span>
-              <span>Autoridade</span>
-            </motion.div>
-
-            {/* CTA — U7 */}
-            <motion.a
-              href="https://typebot.co/mentoria-aura"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.7 }}
-              whileHover={{ y: -2, scale: 1.05, boxShadow: "0 0 30px rgba(0,242,255,0.6)" }}
-              className="inline-flex items-center gap-4 pl-8 pr-10 py-5 sm:py-6 rounded-md font-bold text-[20px] sm:text-[24px] transition-all duration-300 hover:brightness-125 text-black bg-[#00f2ff] opacity-100 relative z-[60]"
-              style={{
-                boxShadow: "0 0 20px rgba(0,242,255,0.4)",
-              }}
-            >
-              <MessageCircle size={22} strokeWidth={3} />
-              <span className="w-px h-6 bg-black/20" aria-hidden="true" />
-              Aplicar para a Sessão Estratégica
-            </motion.a>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.9 }}
-              className="mt-8 text-[12px] uppercase tracking-[2px] opacity-70 font-semibold"
-            >
-              MESA LIMITADA A 33 MEMBROS POR SEMESTRE · PROCESSO SELETIVO
-            </motion.div>
-
+              {/* Vídeo Vertical do YouTube */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4 }}
+                className="lg:col-span-5 flex justify-center lg:justify-end"
+              >
+                <div className="w-full max-w-[320px] sm:max-w-[350px] rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-white/20">
+                  <div className="relative w-full aspect-[9/16] bg-black/50">
+                    <iframe
+                      className="absolute inset-0 w-full h-full pointer-events-auto"
+                      src="https://www.youtube.com/embed/MbXZsn2mP60?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=MbXZsn2mP60"
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </section>
 
@@ -1203,7 +1228,7 @@ function AuraLandingPage() {
                 </div>
               </div>
 
-              {/* Author Rail — Lista de todos os 10 casos */}
+              {/* Author Rail — Faixa horizontal no mobile, lista vertical no desktop */}
               <div className="lg:col-span-5 rounded-[2rem] bg-white/[0.02] border border-white/[0.08] p-4 sm:p-5 flex flex-col">
                 <div className="flex items-center justify-between px-2 pb-3 mb-3 border-b border-white/[0.08]">
                   <span className="uppercase text-[10px] tracking-[3px] font-black text-white/60">
@@ -1214,7 +1239,40 @@ function AuraLandingPage() {
                   </span>
                 </div>
 
-                <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
+                {/* Mobile horizontal chips */}
+                <div className="flex lg:hidden gap-2.5 overflow-x-auto pb-2 snap-x">
+                  {TESTIMONIALS.map((item, idx) => {
+                    const isActive = idx === activeTestimonial;
+                    return (
+                      <button
+                        key={`mob-${item.id}`}
+                        type="button"
+                        onClick={() => setActiveTestimonial(idx)}
+                        className={`snap-start shrink-0 px-3 py-2 rounded-xl border transition-all duration-300 flex items-center gap-2.5 cursor-pointer ${
+                          isActive
+                            ? "bg-white/[0.1] border-white/30"
+                            : "bg-white/[0.03] border-white/10"
+                        }`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          loading="lazy"
+                          decoding="async"
+                          className={`w-9 h-9 rounded-lg object-cover object-top shrink-0 border border-white/15 transition-all ${
+                            isActive ? "grayscale-0" : "grayscale-[30%] contrast-[1.05]"
+                          }`}
+                        />
+                        <span className="text-[13px] font-bold text-white whitespace-nowrap">
+                          {item.name}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Desktop vertical list */}
+                <div className="hidden lg:block space-y-2 max-h-[480px] overflow-y-auto pr-1">
                   {TESTIMONIALS.map((item, idx) => {
                     const isActive = idx === activeTestimonial;
                     return (
@@ -1222,7 +1280,7 @@ function AuraLandingPage() {
                         key={item.id}
                         type="button"
                         onClick={() => setActiveTestimonial(idx)}
-                        className={`w-full text-left p-3 rounded-2xl border transition-all duration-300 flex items-center gap-3.5 cursor-pointer ${
+                        className={`group/rail w-full text-left p-3 rounded-2xl border transition-all duration-300 flex items-center gap-3.5 cursor-pointer ${
                           isActive
                             ? "bg-white/[0.08] border-white/25"
                             : "bg-transparent border-transparent hover:bg-white/[0.04] hover:border-white/10"
@@ -1233,7 +1291,11 @@ function AuraLandingPage() {
                           alt={item.name}
                           loading="lazy"
                           decoding="async"
-                          className="w-11 h-11 rounded-xl object-cover object-top shrink-0 border border-white/15"
+                          className={`w-11 h-11 rounded-xl object-cover object-top shrink-0 border border-white/15 transition-all duration-300 ${
+                            isActive
+                              ? "grayscale-0 contrast-100"
+                              : "grayscale-[30%] contrast-[1.05] group-hover/rail:grayscale-0"
+                          }`}
                         />
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
@@ -1349,15 +1411,15 @@ function AuraLandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.12, ease: EASE_AURA }}
-                  className="group relative p-10 rounded-[2.5rem] bg-white/20 backdrop-blur-md border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                  className="group relative p-10 rounded-[2.5rem] bg-white/60 backdrop-blur-md border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                 >
                   {/* Subtle Inner Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
                   <h3 className="text-[20px] font-black text-black mb-4 uppercase tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-[15px] text-black/60 leading-relaxed font-medium">
+                  <p className="text-[15px] text-black/75 leading-relaxed font-medium">
                     {item.desc}
                   </p>
                 </motion.article>
@@ -1423,23 +1485,7 @@ function AuraLandingPage() {
               ))}
             </div>
 
-            <motion.a
-              href="https://typebot.co/mentoria-aura"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -2, scale: 1.02 }}
-              className="inline-flex items-center gap-4 pl-6 pr-8 py-4 sm:py-5 rounded-sm font-editorial font-bold text-[18px] sm:text-[22px] transition-all duration-300 hover:brightness-110 text-black bg-[#00f2ff]"
-              style={{
-                boxShadow: "none",
-              }}
-            >
-              <MessageCircle size={18} strokeWidth={2.5} />
-              <span className="w-px h-5 bg-black/20" aria-hidden="true" />
-              Aplicar para a Sessão Estratégica
-            </motion.a>
+            <AuraCTA />
 
             <motion.div
               initial={{ opacity: 0 }}

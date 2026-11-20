@@ -382,12 +382,11 @@ function AuraLandingPage() {
               className="mb-10 text-white flex flex-col items-center"
             >
               <div
-                className="uppercase text-[11px] tracking-[4px] text-white/50 mb-4 font-editorial"
+                className="uppercase text-[11px] tracking-[4px] text-white/50 mb-3 font-editorial"
                 style={{ fontWeight: 400 }}
               >
                 Mentoria e Protocolo
               </div>
-              <AuraLogo className="h-16 sm:h-20 w-auto mb-2 opacity-35" ariaLabel="AURA" />
               <div
                 className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-white/80 font-editorial"
                 style={{ textShadow: "none", fontWeight: 400 }}
@@ -402,78 +401,80 @@ function AuraLandingPage() {
               </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
-              <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-                <motion.div
-                  initial={{ opacity: 0, y: 0 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.15, ease: EASE_REVEAL }}
-                  className="inline-block px-5 py-2 uppercase text-[11px] font-bold tracking-[2.5px] text-[#FFD700] mb-6 bg-white/[0.1] backdrop-blur-md rounded-full border border-white/20"
-                  style={{ textShadow: "none" }}
-                >
-                  Seja protagonista da sua história · por Augustto Leão
-                </motion.div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch w-full">
+              <div className="lg:col-span-7 flex flex-col justify-between items-center lg:items-start text-center lg:text-left">
+                <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.15, ease: EASE_REVEAL }}
+                    className="inline-block px-5 py-2 uppercase text-[11px] font-bold tracking-[2.5px] text-[#FFD700] mb-6 bg-white/[0.1] backdrop-blur-md rounded-full border border-white/20"
+                    style={{ textShadow: "none" }}
+                  >
+                    Seja protagonista da sua história · por Augustto Leão
+                  </motion.div>
 
-                <motion.h1
-                  id="hero-heading"
-                  initial={{ opacity: 0, scale: 0.97 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1, delay: 0.2, ease: EASE_REVEAL }}
-                  className="text-[clamp(28px,4.5vw,56px)] font-black leading-[0.98] tracking-[-1px] md:tracking-[-2px] text-white mb-6 uppercase"
-                  style={{ textShadow: "none" }}
-                >
-                  ATIVE SEU POSICIONAMENTO, DOMINE SUA COMUNICAÇÃO E PRESENÇA NA VIDA E NOS NEGÓCIOS
-                </motion.h1>
+                  <motion.h1
+                    id="hero-heading"
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, delay: 0.2, ease: EASE_REVEAL }}
+                    className="text-[clamp(28px,4.5vw,56px)] font-black leading-[0.98] tracking-[-1px] md:tracking-[-2px] text-white mb-6 uppercase"
+                    style={{ textShadow: "none" }}
+                  >
+                    ATIVE SEU POSICIONAMENTO, DOMINE SUA COMUNICAÇÃO E PRESENÇA NA VIDA E NOS NEGÓCIOS
+                  </motion.h1>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 0 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.35 }}
-                  className="text-[clamp(16px,1.8vw,22px)] text-white/90 mb-8 max-w-[680px] font-editorial italic tracking-[1px]"
-                  style={{ textShadow: "none", fontWeight: 400 }}
-                >
-                  Em 12 semanas veja o reflexo da sua autoridade alinhada com sua competência.
-                </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.35 }}
+                    className="text-[clamp(16px,1.8vw,22px)] text-white/90 mb-8 max-w-[680px] font-editorial italic tracking-[1px]"
+                    style={{ textShadow: "none", fontWeight: 400 }}
+                  >
+                    Em 12 semanas veja o reflexo da sua autoridade alinhada com sua competência.
+                  </motion.div>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 0 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.45 }}
-                  className="text-[clamp(16px,2vw,21px)] font-extrabold mb-4 max-w-[680px] leading-snug uppercase"
-                  style={{ textShadow: "none", color: "#FFD700" }}
-                >
-                  PARA LÍDERES E EMPRESÁRIOS COM RESULTADOS, QUE NÃO SÃO VISTOS NO TAMANHO QUE DEVERIAM SER.
-                </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.45 }}
+                    className="text-[clamp(16px,2vw,21px)] font-extrabold mb-4 max-w-[680px] leading-snug uppercase"
+                    style={{ textShadow: "none", color: "#FFD700" }}
+                  >
+                    PARA LÍDERES E EMPRESÁRIOS COM RESULTADOS, QUE NÃO SÃO VISTOS NO TAMANHO QUE DEVERIAM SER.
+                  </motion.p>
 
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="text-[clamp(15px,1.5vw,17px)] font-normal text-white/80 mb-8 leading-relaxed max-w-[660px]"
-                  style={{ textShadow: "none" }}
-                >
-                  Você construiu competência. Construiu resultado. Mas continua sendo tratado como uma opção — e não como A referência — no seu mercado, na sua mesa, na sua família. A Mentoria AURA reconstrói sua Autoimagem, seu Posicionamento, sua Comunicação Magnética e sua Autoridade em Movimento nos 4 blocos da Jornada de 12 Semanas. No final, você não fala melhor. Você ocupa o lugar certo.
-                </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="text-[clamp(15px,1.5vw,17px)] font-normal text-white/80 mb-8 leading-relaxed max-w-[660px]"
+                    style={{ textShadow: "none" }}
+                  >
+                    Você construiu competência. Construiu resultado. Mas continua sendo tratado como uma opção — e não como A referência — no seu mercado, na sua mesa, na sua família. A Mentoria AURA reconstrói sua Autoimagem, seu Posicionamento, sua Comunicação Magnética e sua Autoridade em Movimento nos 4 blocos da Jornada de 12 Semanas. No final, você não fala melhor. Você ocupa o lugar certo.
+                  </motion.p>
+                </div>
 
-                <div className="flex flex-col items-center lg:items-start w-full">
+                <div className="flex flex-col items-center lg:items-start w-full pt-2">
                   <AuraCTA className="relative z-[60]" />
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 0.7 }}
-                    className="mt-5 text-[11px] uppercase tracking-[2px] opacity-70 font-semibold"
+                    className="mt-4 text-[11px] uppercase tracking-[2px] opacity-70 font-semibold"
                   >
                     MESA LIMITADA A 33 MEMBROS POR SEMESTRE · PROCESSO SELETIVO
                   </motion.div>
                 </div>
               </div>
 
-              {/* Vídeo Vertical do YouTube */}
+              {/* Vídeo Vertical do YouTube + Logos do Ecossistema */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.4 }}
-                className="lg:col-span-5 flex justify-center lg:justify-end"
+                className="lg:col-span-5 flex flex-col justify-between items-center lg:items-end"
               >
                 <div className="w-full max-w-[320px] sm:max-w-[350px] rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-white/20">
                   <div className="relative w-full aspect-[9/16] bg-black/50">
@@ -486,6 +487,34 @@ function AuraLandingPage() {
                       allowFullScreen
                     ></iframe>
                   </div>
+                </div>
+
+                {/* Faixa minimalista das 4 marcas embaixo do vídeo */}
+                <div className="w-full max-w-[320px] sm:max-w-[350px] mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-4">
+                  <div className="text-white/75 hover:text-white transition-opacity">
+                    <AuraLogo className="h-4 sm:h-5 w-auto" ariaLabel="AURA" />
+                  </div>
+                  <img
+                    src="/brands/logo-asp.png"
+                    alt="ASP"
+                    loading="eager"
+                    decoding="async"
+                    className="h-4 sm:h-5 w-auto object-contain opacity-75 hover:opacity-100 transition-opacity"
+                  />
+                  <img
+                    src="/brands/logo-leao.png"
+                    alt="Augustto Leão"
+                    loading="eager"
+                    decoding="async"
+                    className="h-5 sm:h-6 w-auto object-contain brightness-0 invert opacity-75 hover:opacity-100 transition-opacity"
+                  />
+                  <img
+                    src="/brands/logo-sellect-light.png"
+                    alt="Sellect Inteligência"
+                    loading="eager"
+                    decoding="async"
+                    className="h-4 sm:h-5 w-auto object-contain opacity-75 hover:opacity-100 transition-opacity"
+                  />
                 </div>
               </motion.div>
             </div>

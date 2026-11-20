@@ -372,35 +372,9 @@ function AuraLandingPage() {
           </div>
 
           <motion.div
-            className="relative z-40 w-full max-w-[1140px] mx-auto flex flex-col items-center text-center mt-2"
+            className="relative z-40 w-full max-w-[1140px] mx-auto flex flex-col items-center text-center mt-4"
             style={{ opacity: 1 }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: EASE_REVEAL }}
-              className="mb-10 text-white flex flex-col items-center"
-            >
-              <div
-                className="uppercase text-[11px] tracking-[4px] text-white/50 mb-3 font-editorial"
-                style={{ fontWeight: 400 }}
-              >
-                Mentoria e Protocolo
-              </div>
-              <div
-                className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] uppercase tracking-[4px] text-white/80 font-editorial"
-                style={{ textShadow: "none", fontWeight: 400 }}
-              >
-                <span>Ativação</span>
-                <span className="opacity-40" aria-hidden="true">·</span>
-                <span>Unicidade</span>
-                <span className="opacity-40" aria-hidden="true">·</span>
-                <span>Respeito</span>
-                <span className="opacity-40" aria-hidden="true">·</span>
-                <span>Autoridade</span>
-              </div>
-            </motion.div>
-
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch w-full">
               <div className="lg:col-span-7 flex flex-col justify-between items-center lg:items-start text-center lg:text-left">
                 <div>
@@ -476,7 +450,7 @@ function AuraLandingPage() {
                 transition={{ duration: 1, delay: 0.4 }}
                 className="lg:col-span-5 flex flex-col justify-between items-center lg:items-end"
               >
-                <div className="w-full max-w-[320px] sm:max-w-[350px] rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-white/20">
+                <div className="w-full max-w-[360px] sm:max-w-[400px] rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-white/20">
                   <div className="relative w-full aspect-[9/16] bg-black/50">
                     <iframe
                       className="absolute inset-0 w-full h-full pointer-events-auto"
@@ -489,11 +463,8 @@ function AuraLandingPage() {
                   </div>
                 </div>
 
-                {/* Faixa minimalista das 4 marcas embaixo do vídeo */}
-                <div className="w-full max-w-[320px] sm:max-w-[350px] mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-4">
-                  <div className="text-white/75 hover:text-white transition-opacity">
-                    <AuraLogo className="h-4 sm:h-5 w-auto" ariaLabel="AURA" />
-                  </div>
+                {/* Faixa minimalista das 4 marcas embaixo do vídeo: ASP · AURA · Augustto · Sellect */}
+                <div className="w-full max-w-[360px] sm:max-w-[400px] mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-4">
                   <img
                     src="/brands/logo-asp.png"
                     alt="ASP"
@@ -501,6 +472,9 @@ function AuraLandingPage() {
                     decoding="async"
                     className="h-4 sm:h-5 w-auto object-contain opacity-75 hover:opacity-100 transition-opacity"
                   />
+                  <div className="text-white/75 hover:text-white transition-opacity">
+                    <AuraLogo className="h-4 sm:h-5 w-auto" ariaLabel="AURA" />
+                  </div>
                   <img
                     src="/brands/logo-leao.png"
                     alt="Augustto Leão"

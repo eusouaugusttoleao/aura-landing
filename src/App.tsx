@@ -22,6 +22,80 @@ const heroImg = `${ASSETS}/augustto-palco-frente.jpg`;
 const TYPEBOT_URL = "https://typebot.co/mentoria-aura";
 
 /**
+ * Geometria Sagrada (Flor da Vida minimalista) — Referência Moodboard Slide 3.
+ */
+function SacredGeometryMark({ className = "" }: { className?: string }) {
+  const circles = [
+    [100, 100],
+    [100, 64],
+    [100, 136],
+    [68.8, 82],
+    [131.2, 82],
+    [68.8, 118],
+    [131.2, 118],
+  ];
+  return (
+    <svg
+      viewBox="0 0 200 200"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="0.75"
+      aria-hidden="true"
+      className={className}
+    >
+      <circle cx="100" cy="100" r="88" strokeOpacity="0.35" />
+      <circle cx="100" cy="100" r="74" strokeOpacity="0.2" />
+      {circles.map(([cx, cy], idx) => (
+        <circle key={idx} cx={cx} cy={cy} r="36" strokeOpacity="0.45" />
+      ))}
+    </svg>
+  );
+}
+
+/**
+ * Diagrama Radial ("Foque em uma única coisa") — Referência Moodboard Slide 4.
+ */
+function FocusDiagramMark({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 160 160"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="0.8"
+      aria-hidden="true"
+      className={className}
+    >
+      <circle cx="80" cy="80" r="64" strokeOpacity="0.35" />
+      {Array.from({ length: 24 }).map((_, i) => {
+        const angle = (i * 15 * Math.PI) / 180;
+        const x2 = 80 + Math.cos(angle) * 64;
+        const y2 = 80 + Math.sin(angle) * 64;
+        return <line key={i} x1="80" y1="80" x2={x2} y2={y2} strokeOpacity="0.35" />;
+      })}
+      <circle cx="80" cy="80" r="7" fill="currentColor" fillOpacity="0.85" />
+    </svg>
+  );
+}
+
+/**
+ * Texto rotativo vertical em pílula — inspirado na animação connect-ai-label do Refero.
+ */
+function RotatingPillWords() {
+  const words = ["Ativação", "Unicidade", "Respeito", "Autoridade"];
+  return (
+    <span className="inline-block h-[16px] overflow-hidden align-middle">
+      <span className="aura-word-track">
+        {words.map((w) => (
+          <span key={w} className="h-[16px] leading-[16px] block text-[var(--aura-gold)]">
+            {w}
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+/**
  * Botão principal unificado da Mentoria AURA (Hero e CTA Final).
  */
 function AuraCTA({ className = "" }: { className?: string }) {
@@ -382,10 +456,12 @@ function AuraLandingPage() {
                     initial={{ opacity: 0, y: 0 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.15, ease: EASE_REVEAL }}
-                    className="inline-block px-5 py-2 uppercase text-[11px] font-bold tracking-[2.5px] text-[#FFD700] mb-6 bg-white/[0.1] backdrop-blur-md rounded-full border border-white/20"
+                    className="inline-flex items-center gap-2.5 px-5 py-2 uppercase text-[11px] font-bold tracking-[2.5px] text-white/90 mb-6 bg-white/[0.08] backdrop-blur-md rounded-full border border-white/15"
                     style={{ textShadow: "none" }}
                   >
-                    Seja protagonista da sua história · por Augustto Leão
+                    <span>Seja protagonista da sua história</span>
+                    <span className="opacity-40" aria-hidden="true">·</span>
+                    <RotatingPillWords />
                   </motion.div>
 
                   <motion.h1
@@ -393,7 +469,7 @@ function AuraLandingPage() {
                     initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, delay: 0.2, ease: EASE_REVEAL }}
-                    className="text-[clamp(28px,4.5vw,56px)] font-black leading-[0.98] tracking-[-1px] md:tracking-[-2px] text-white mb-6 uppercase"
+                    className="font-display text-[clamp(38px,5.6vw,74px)] font-extrabold text-white mb-6 uppercase"
                     style={{ textShadow: "none" }}
                   >
                     ATIVE SEU POSICIONAMENTO, DOMINE SUA COMUNICAÇÃO E PRESENÇA NA VIDA E NOS NEGÓCIOS
@@ -515,6 +591,16 @@ function AuraLandingPage() {
           </div>
 
           <div className="max-w-[1040px] mx-auto w-full relative z-10">
+            {/* Ghost text do Moodboard (#93877E) + Diagrama Radial */}
+            <div
+              className="hidden md:block absolute -top-10 -left-4 font-display text-[130px] lg:text-[180px] uppercase tracking-tight select-none pointer-events-none opacity-[0.05]"
+              style={{ color: "var(--aura-taupe)" }}
+              aria-hidden="true"
+            >
+              DISSONÂNCIA
+            </div>
+            <FocusDiagramMark className="hidden lg:block absolute top-2 right-0 w-36 h-36 text-white/30 pointer-events-none" />
+
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -524,11 +610,11 @@ function AuraLandingPage() {
               <Eyebrow>A Injustiça do Mercado</Eyebrow>
               <h2
                 id="section-injustica"
-                className="text-[clamp(28px,4.5vw,52px)] font-extrabold tracking-[-1px] md:tracking-[-1.5px] text-[var(--aura-white)] mb-6 max-w-[800px] leading-tight"
+                className="font-display text-[clamp(36px,5.2vw,66px)] font-extrabold text-[var(--aura-white)] mb-6 max-w-[800px] uppercase"
               >
                 O mercado não paga quem é melhor. <br />
                 Paga quem é{" "}
-                <span className="font-editorial text-[var(--aura-gold)]">
+                <span className="font-editorial normal-case aura-gold-sweep">
                   melhor percebido
                 </span>
                 .
@@ -661,15 +747,16 @@ function AuraLandingPage() {
           </div>
 
           <div className="max-w-[1040px] mx-auto w-full relative z-10">
-            <div className="flex flex-col items-center text-center mb-20">
+            <SacredGeometryMark className="w-[340px] h-[340px] md:w-[440px] md:h-[440px] text-[var(--aura-gold)] opacity-[0.07] absolute -top-24 left-1/2 -translate-x-1/2 pointer-events-none" />
+            <div className="flex flex-col items-center text-center mb-20 relative z-10">
               <Eyebrow>Desativar para Ativar</Eyebrow>
               <h2
                 id="section-pilares"
-                className="text-[clamp(28px,4.5vw,52px)] font-extrabold tracking-[-1px] md:tracking-[-1.5px] text-[var(--aura-white)] mb-6 max-w-[800px] leading-tight"
+                className="font-display text-[clamp(36px,5.2vw,66px)] font-extrabold text-[var(--aura-white)] mb-6 max-w-[800px] uppercase"
               >
                 O mercado vende personagens. <br />
                 Nós ativamos sua{" "}
-                <span className="font-editorial text-[var(--aura-gold)]">
+                <span className="font-editorial normal-case aura-gold-sweep">
                   Autoimagem Real
                 </span>
                 .
@@ -937,15 +1024,22 @@ function AuraLandingPage() {
           </div>
 
           <div className="max-w-[1040px] mx-auto w-full relative z-10">
-            <div className="flex flex-col items-center text-center mb-16">
+            <div
+              className="hidden md:block absolute -top-8 left-1/2 -translate-x-1/2 font-display text-[130px] lg:text-[170px] uppercase tracking-tight select-none pointer-events-none opacity-[0.05] whitespace-nowrap"
+              style={{ color: "var(--aura-taupe)" }}
+              aria-hidden="true"
+            >
+              FLUXO DE ATIVAÇÃO
+            </div>
+            <div className="flex flex-col items-center text-center mb-16 relative z-10">
               <Eyebrow>A Jornada AURA</Eyebrow>
               <h2
                 id="section-jornada"
-                className="text-[clamp(28px,4.5vw,52px)] font-extrabold tracking-[-1px] md:tracking-[-1.5px] text-[var(--aura-white)] mb-6 max-w-[800px] leading-tight"
+                className="font-display text-[clamp(36px,5.2vw,66px)] font-extrabold text-[var(--aura-white)] mb-6 max-w-[800px] uppercase"
               >
                 12 semanas. 4 blocos. <br />
                 Uma{" "}
-                <span className="font-editorial text-[var(--aura-gold)]">
+                <span className="font-editorial normal-case aura-gold-sweep">
                   transformação
                 </span>
                 .

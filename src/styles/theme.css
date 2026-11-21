@@ -5,16 +5,20 @@
 
   /* ─── AURA Type Families ─── */
   --font-sans:      'Poppins', system-ui, -apple-system, sans-serif;
+  --font-display:   'Barlow Condensed', sans-serif;
   --font-editorial: 'Cormorant Garamond', Georgia, serif;
 
-  /* ─── AURA Color System — Graphite Edition ─── */
+  /* ─── AURA Color System — Moodboard & Brand Kit ─── */
   --aura-black:     #070707;
   --aura-deep:      #0F0F0F;
   --aura-ember:     #1A1A1A;
   --aura-fire:      #4A4A4A;
   --aura-flame:     #787878;
-  --aura-gold:      #FFD700;
-  --aura-cream:     #FFFFFF;
+  --aura-gold:      #FFDE59;
+  --aura-teal:      #0097B2;
+  --aura-violet:    #5E17EB;
+  --aura-taupe:     #93877E;
+  --aura-cream:     #FFFBFB;
   --aura-white:     #FFFFFF;
 
   --aura-cream-60:  rgba(240, 240, 240, 0.6);
@@ -137,10 +141,44 @@
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
+.font-display {
+  font-family: var(--font-display);
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+}
 .font-editorial {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-weight: 200;
+  font-weight: 400;
+}
+
+/* Refero-inspired micro-animations */
+@keyframes aura-word-cycle {
+  0%, 20% { transform: translateY(0%); }
+  25%, 45% { transform: translateY(-25%); }
+  50%, 70% { transform: translateY(-50%); }
+  75%, 95% { transform: translateY(-75%); }
+  100% { transform: translateY(0%); }
+}
+
+@keyframes aura-text-sweep {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.aura-word-track {
+  display: flex;
+  flex-direction: column;
+  animation: aura-word-cycle 8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.aura-gold-sweep {
+  background-image: linear-gradient(110deg, #ffde59 0%, #fff6c2 45%, #ffde59 65%, #e6b800 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: aura-text-sweep 5s ease-in-out infinite alternate;
 }
 
 /* Reduced motion (U3 — A1) */

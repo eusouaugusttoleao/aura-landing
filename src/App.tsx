@@ -96,6 +96,108 @@ function RotatingPillWords() {
 }
 
 /**
+ * Wordmark oficial Elitte Corp (Space Grotesk 700 + 400).
+ */
+function ElitteCorpLogo({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 420 90"
+      fill="none"
+      role="img"
+      aria-label="Elitte Corp"
+      className={className}
+    >
+      <text
+        x="0"
+        y="66"
+        fontFamily="'Space Grotesk', sans-serif"
+        fontWeight="700"
+        letterSpacing="-0.025em"
+        fontSize="66"
+        fill="currentColor"
+      >
+        ELITTE
+      </text>
+      <text
+        x="228"
+        y="26"
+        fontFamily="'Space Grotesk', sans-serif"
+        fontWeight="400"
+        fontSize="14"
+        fill="currentColor"
+        fillOpacity="0.55"
+      >
+        TM
+      </text>
+      <text
+        x="256"
+        y="66"
+        fontFamily="'Space Grotesk', sans-serif"
+        fontWeight="400"
+        letterSpacing="-0.015em"
+        fontSize="60"
+        fill="currentColor"
+        fillOpacity="0.88"
+      >
+        corp
+      </text>
+    </svg>
+  );
+}
+
+/**
+ * Wordmark Elitte For Men (mesmo padrão tipográfico oficial Space Grotesk da Elitte).
+ */
+function ElitteForMenLogo({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 470 90"
+      fill="none"
+      role="img"
+      aria-label="Elitte For Men"
+      className={className}
+    >
+      <text
+        x="0"
+        y="66"
+        fontFamily="'Space Grotesk', sans-serif"
+        fontWeight="700"
+        letterSpacing="-0.025em"
+        fontSize="66"
+        fill="currentColor"
+      >
+        ELITTE
+      </text>
+      <text
+        x="228"
+        y="26"
+        fontFamily="'Space Grotesk', sans-serif"
+        fontWeight="400"
+        fontSize="14"
+        fill="currentColor"
+        fillOpacity="0.55"
+      >
+        TM
+      </text>
+      <text
+        x="256"
+        y="66"
+        fontFamily="'Space Grotesk', sans-serif"
+        fontWeight="400"
+        letterSpacing="-0.015em"
+        fontSize="52"
+        fill="currentColor"
+        fillOpacity="0.88"
+      >
+        for men
+      </text>
+    </svg>
+  );
+}
+
+/**
  * Botão principal unificado da Mentoria AURA (Hero e CTA Final).
  */
 function AuraCTA({ className = "" }: { className?: string }) {
@@ -1585,32 +1687,38 @@ function AuraLandingPage() {
 
       {/* ─── FOOTER — Colophon editorial (U20) ─── */}
       <footer className="py-16 px-6 text-center bg-[var(--aura-black)] relative z-10 border-t border-white/[0.06]">
-        <div className="max-w-[1040px] mx-auto flex flex-col items-center gap-8">
-          <div className="flex items-center justify-center gap-6 sm:gap-8 flex-wrap">
+        <div className="max-w-[1140px] mx-auto flex flex-col items-center gap-10">
+          <div className="flex items-center justify-center gap-8 sm:gap-12 flex-wrap">
             <img
               src="/brands/logo-asp.png"
               alt="ASP"
               loading="lazy"
               decoding="async"
-              className="h-4 sm:h-5 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+              className="h-7 sm:h-9 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
             />
-            <div className="text-white/60 hover:text-white transition-opacity">
-              <AuraLogo className="h-4 sm:h-5 w-auto" ariaLabel="AURA" />
+            <div className="text-white/70 hover:text-white transition-opacity">
+              <AuraLogo className="h-7 sm:h-9 w-auto" ariaLabel="AURA" />
             </div>
             <img
               src="/brands/logo-leao.png"
               alt="Augustto Leão"
               loading="lazy"
               decoding="async"
-              className="h-5 sm:h-6 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"
+              className="h-9 sm:h-11 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
             />
             <img
               src="/brands/logo-sellect-light.png"
               alt="Sellect Inteligência"
               loading="lazy"
               decoding="async"
-              className="h-4 sm:h-5 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity"
+              className="h-7 sm:h-9 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
             />
+            <div className="text-white/70 hover:text-white transition-opacity">
+              <ElitteCorpLogo className="h-6 sm:h-8 w-auto" />
+            </div>
+            <div className="text-white/70 hover:text-white transition-opacity">
+              <ElitteForMenLogo className="h-6 sm:h-8 w-auto" />
+            </div>
           </div>
 
           <div className="text-[10px] tracking-[2px] uppercase opacity-55 text-[var(--aura-cream)] flex flex-col gap-2">

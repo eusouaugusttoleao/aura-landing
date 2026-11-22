@@ -147,57 +147,6 @@ function ElitteCorpLogo({ className = "" }: { className?: string }) {
 }
 
 /**
- * Wordmark Elitte For Men (mesmo padrão tipográfico oficial Space Grotesk da Elitte).
- */
-function ElitteForMenLogo({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 470 90"
-      fill="none"
-      role="img"
-      aria-label="Elitte For Men"
-      className={className}
-    >
-      <text
-        x="0"
-        y="66"
-        fontFamily="'Space Grotesk', sans-serif"
-        fontWeight="700"
-        letterSpacing="-0.025em"
-        fontSize="66"
-        fill="currentColor"
-      >
-        ELITTE
-      </text>
-      <text
-        x="228"
-        y="26"
-        fontFamily="'Space Grotesk', sans-serif"
-        fontWeight="400"
-        fontSize="14"
-        fill="currentColor"
-        fillOpacity="0.55"
-      >
-        TM
-      </text>
-      <text
-        x="256"
-        y="66"
-        fontFamily="'Space Grotesk', sans-serif"
-        fontWeight="400"
-        letterSpacing="-0.015em"
-        fontSize="52"
-        fill="currentColor"
-        fillOpacity="0.88"
-      >
-        for men
-      </text>
-    </svg>
-  );
-}
-
-/**
  * Botão principal unificado da Mentoria AURA (Hero e CTA Final).
  */
 function AuraCTA({ className = "" }: { className?: string }) {
@@ -1715,9 +1664,6 @@ function AuraLandingPage() {
             />
             <div className="text-white/70 hover:text-white transition-opacity">
               <ElitteCorpLogo className="h-6 sm:h-8 w-auto" />
-            </div>
-            <div className="text-white/70 hover:text-white transition-opacity">
-              <ElitteForMenLogo className="h-6 sm:h-8 w-auto" />
             </div>
           </div>
 
